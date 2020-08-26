@@ -1,6 +1,6 @@
-README.md
------------
-This is the readme file of bios611-project1
+BIOS611 Project1
+========================================
+Food Review Analysis
 -------------------------------------------
 The project including an analysis of the food review in Amazon
 -------------------------------------------
