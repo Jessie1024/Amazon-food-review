@@ -11,4 +11,5 @@ Using This Porject
 you will need Docker and the ability to run Docker as your current user.
 
     >docker build . -t project1-env
-    >docker run -v 'pwd:/home/rstudio -p 8787:8787 -e PASSWORD=<yourpassword> -t project1-env
+    >docker run -v docker run -v /home/jessieyy/storage/bios611-project1
+	:/home/rstudio/bios611-project1 -p 8787:8787 -e PASSWORD=mypassword -i project1
