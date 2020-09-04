@@ -1,0 +1,5 @@
+FROM rocker/verse
+MAINTAINER Qianhui Yang <jessy1024qh@gmail.com>
+RUN R -e "install.packages('tidytext')"
+RUN R -e "install.packages('kableExtra')"
+RUN R -e "install.packages('formattable')"
