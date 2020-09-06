@@ -4,3 +4,5 @@ derived_data/*.csv
 source_data/*.csv
 figures/*.png
 figures/*.pdf
+.active-rstudio-document
+.config
