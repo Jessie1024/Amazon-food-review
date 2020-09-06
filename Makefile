@@ -1,6 +1,13 @@
 
 
-derived_data/clean_food_review.csv:\
-	source_data/food_review.csv\
-	tidy_source_data.R
-	Rscript tidy_source_data.R
+derived_data/tidy_data.csv:\
+	source_data/Reviews.csv\
+	tidy_data.R
+	Rscript tidy_data.R
+	
+image/Overall_score_distribution.png\
+	image/Helpfulness of the review.png:\
+	derived_data/tidy_data.csv\
+	Overall.R
+	Rscript Overall.R
+	
