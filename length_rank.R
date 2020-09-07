@@ -5,7 +5,7 @@ library(kableExtra)
 library(formattable)
 library(stringr)
 library(tidytext)
-
+webshot::install_phantomjs()
 
 raw_data<-read_csv("derived_data/clean_data.csv")
 #####review length rank by id####
@@ -14,7 +14,8 @@ full_word_count<-raw_data %>%
   group_by(id, summary,score) %>%
   summarise(num_words=n()) %>%
   arrange(desc(num_words))
-  
+
+full_word_count<-write_csv(full_word_count,"derived_data/full_word_count.csv")
 #####top20 graph#####3
   full_word_count[1:23,] %>%
   ungroup(num_words, id, summary,score) %>%
