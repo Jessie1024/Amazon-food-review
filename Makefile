@@ -42,8 +42,14 @@ full_word_count.csv\
 	
 	
 popular_words.csv\
-	image/Popular Words by Review Scores.png:\
+	image/Popular_Words_by_Review_Scores.png:\
 	top_words_by_score.R
 	Rscipt top_words_by_score.R
 	
-	
+image/lexical_density.png\
+	image/lexical_diversity.png\
+	derived_data/lex_density_per_score.csv\
+	derived_data/lex_diversity_per_score.csv:\
+	derived_data/clean_data.csv\
+	lexical_density_diversity.R
+	Rscript lexical_density_diversity.R
