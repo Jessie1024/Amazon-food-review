@@ -53,3 +53,10 @@ image/lexical_density.png\
 	derived_data/clean_data.csv\
 	lexical_density_diversity.R
 	Rscript lexical_density_diversity.R
+	
+	
+image/TF-IDF.png:\
+	derived_data/clean_data.csv\
+	TF-IDF.R
+	Rscript TF-IDF.R
+	
