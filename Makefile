@@ -32,3 +32,10 @@ image/distribution of review length.png\
 	derived_data/full_word_count.csv\
 	length_rank.R
 	Rscript length_rank.R
+	
+full_word_count.csv\
+	top words.png:\
+	derived_data/clean_data.csv\
+	top_words.R
+	Rscript top_words.R
+	
