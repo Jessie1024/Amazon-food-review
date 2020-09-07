@@ -39,3 +39,11 @@ full_word_count.csv\
 	top_words.R
 	Rscript top_words.R
 	
+	
+	
+popular_words.csv\
+	image/Popular Words by Review Scores.png:\
+	top_words_by_score.R
+	Rscipt top_words_by_score.R
+	
+	
