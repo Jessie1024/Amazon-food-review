@@ -37,9 +37,9 @@ fix.contractions<-function(doc){
 
 raw_data$summary<-sapply(raw_data$summary,fix.contractions)
 raw_data$text<-sapply(raw_data$text, fix.contractions)
-
+class(raw_data$time) <- c('POSIXt','POSIXct')
 write_csv(raw_data,"derived_data/clean_data.csv")
 summary(raw_data)
 
 ####change to data format######
-class(raw_data$time) <- c('POSIXt','POSIXct')
+
