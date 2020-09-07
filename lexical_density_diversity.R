@@ -26,6 +26,7 @@ lex_diversity_per_score <- raw_data %>%
   summarise(lex_diversity = n_distinct(word)) %>%
   arrange(desc(lex_diversity)) 
 
+write_csv(lex_diversity_per_score, "derived_data/lex_diversity_per_score.csv")
 diversity_plot <- lex_diversity_per_score %>%
   ggplot(aes(score, lex_diversity)) +
   geom_point(color = my_colors[3],
@@ -53,6 +54,7 @@ lex_density_per_year <- raw_data %>%
   summarise(lex_density = n_distinct(word)/n()) %>%
   arrange(desc(lex_density))
 
+write_csv(lex_density_per_year, "derived_data/lex_density_per_score.csv")
 density_plot <- lex_density_per_year %>%
   ggplot(aes(score, lex_density)) + 
   geom_point(color = my_colors[4],
