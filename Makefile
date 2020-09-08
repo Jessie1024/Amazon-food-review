@@ -60,3 +60,9 @@ image/TF-IDF.png:\
 	TF-IDF.R
 	Rscript TF-IDF.R
 	
+
+ review_bing_sentiment.png\
+	image/sentiment_match_in_three_database.png:\
+	derived_data/review_words_filtered.csv\
+	sentiment_explore.R
+	Rscript sentiment_explore.R
