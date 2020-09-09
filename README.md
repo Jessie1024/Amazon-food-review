@@ -24,13 +24,13 @@ First, we make thea histogram of Amazon food review score from 1-5.
 Then, we makes a histogram of Amazon food review helpfulness distribution.
 ![](assets/Helpfulness_of_the_review.png)
 After having a general desctription figure,we further analyze the length of the reviews.
-![](assets/distribution of review length.png)
 ![](assets/distribution_of_review_length.png)
-![](assets/distribution of review length score=1.png)
+![](assets/distribution_of_review_length.png)
+![](assets/distribution_of_review_length_score=1.png)
 ![](assets/distribution_of_review_length_score=2.png) 
-![](assets/distribution of review length score=3.png) 
+![](assets/distribution_of_review_length_score=3.png) 
 ![](assets/distribution_of_review_length_score=4.png) 
-![](assets/distribution of review length score=5.png) 
+![](assets/distribution_of_review_length_score=5.png) 
 popular words by review scores.
 ![](assets/Popular_Words_by_Review_Scores.png)
 lexical density of the reviews by scores
