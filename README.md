@@ -41,7 +41,7 @@ and TF-IDF to discover the most unique words in the reviews by scores
 ![](assets/TF-IDF.pngg)
 
 
-Positive or Negative? Upset or pleased? Sentiment Explre
+Positive or Negative? Upset or pleased? Sentiment Explore
 ------------------------------------------
 Machine can't understand reviews but can in some-ways define the sentiment of the review.
 Here we use the r library tidytext to "teach" the "machine"
@@ -49,12 +49,12 @@ Here are the same words that the review and the sentiment database has shared
 ![](assets/sentiment_match_in_three_database.png)
 Using the database "bing" we found that most of the words in our review are positive.
 ![](assets/review_bing_sentiment.png)
-Using the database "nrc" here are the top sentiments in general reviews and positive and nehative reviews
+Using the database "nrc" here are the top sentiments in general reviews and positive and negative reviews
 ![](assets/review_nrc_sentiment.png)
 ![](assets/score1review_nrc_sentiment.png)
 ![](assets/score5review_nrc_sentiment.png)
 
-The next goal is to discover the words most founds in those sentiments.
+The next goal is to discover the words most found in those sentiments.
 
 sentiments prediction
 --------------------------------------------
@@ -76,6 +76,7 @@ Then connect to the machine on port 8787.
 Makefile
 -------------------------------------------
 Makefile shows the organization of the project.
-Enter through terminal or Rstudio:
+Enter through terminal or Rstudio.
+
     >Make example-folder/example-image.png
     >Make example-folder/example-dataset.csv
