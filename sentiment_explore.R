@@ -97,11 +97,63 @@ bing_plot <- review_bing %>%
   ggsave("image/review_bing_sentiment.png")
 
 
+review_nrc <- review_words_filtered %>%
+  inner_join(get_sentiments("nrc"))
 
 
 
+nrc_plot <- review_nrc %>%
+  group_by(sentiment) %>%
+  summarise(word_count = n()) %>%
+  ungroup() %>%
+  mutate(sentiment = reorder(sentiment, word_count)) %>%
+  #Use `fill = -word_count` to make the larger bars darker
+  ggplot(aes(sentiment, word_count, fill = -word_count)) +
+  geom_col() +
+  guides(fill = FALSE) + #Turn off the legend
+  labs(x = NULL, y = "Word Count") +
+  scale_y_continuous(limits = c(0, 2000000)) + #Hard code the axis limit
+  ggtitle("Review NRC Sentiment") +
+  coord_flip()+
+  ggsave("image/review_nrc_sentiment.png")
+
+review_nrc_5<- review_words_filtered %>%
+  inner_join(get_sentiments("nrc"))%>%
+  filter(score==5)
+
+nrc_plot_5 <- review_nrc_5 %>%
+  group_by(sentiment) %>%
+  summarise(word_count = n()) %>%
+  ungroup() %>%
+  mutate(sentiment = reorder(sentiment, word_count)) %>%
+  #Use `fill = -word_count` to make the larger bars darker
+  ggplot(aes(sentiment, word_count, fill = -word_count)) +
+  geom_col() +
+  guides(fill = FALSE) + #Turn off the legend
+  labs(x = NULL, y = "Word Count") +
+  scale_y_continuous(limits = c(0, 1500000)) + #Hard code the axis limit
+  ggtitle("Positive Review NRC Sentiment ") +
+  coord_flip()+
+  ggsave("image/score5review_nrc_sentiment.png")
 
 
+review_nrc_1<- review_words_filtered %>%
+  inner_join(get_sentiments("nrc"))%>%
+  filter(score==1)
 
+nrc_plot_1 <- review_nrc_1 %>%
+  group_by(sentiment) %>%
+  summarise(word_count = n()) %>%
+  ungroup() %>%
+  mutate(sentiment = reorder(sentiment, word_count)) %>%
+  #Use `fill = -word_count` to make the larger bars darker
+  ggplot(aes(sentiment, word_count, fill = -word_count)) +
+  geom_col() +
+  guides(fill = FALSE) + #Turn off the legend
+  labs(x = NULL, y = "Word Count") +
+  scale_y_continuous(limits = c(0, 150000)) + #Hard code the axis limit
+  ggtitle("Negative Review NRC Sentiment ") +
+  coord_flip()+
+  ggsave("image/score1review_nrc_sentiment.png")
 
 
