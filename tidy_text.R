@@ -4,7 +4,7 @@
 
 library(stringr)
 library(tidytext)
-
+library(tidyverse)
 #####tidy the summary and text#######
 raw_data<-read_csv("derived_data/tidy_data.csv")
 raw_data$summary<-raw_data$summary%>%

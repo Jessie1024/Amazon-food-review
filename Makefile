@@ -34,6 +34,7 @@ image/distribution of review length.png\
 	Rscript length_rank.R
 	
 full_word_count.csv\
+	derived_data/review_words_filtered.csv\
 	top words.png:\
 	derived_data/clean_data.csv\
 	top_words.R
@@ -61,7 +62,10 @@ image/TF-IDF.png:\
 	Rscript TF-IDF.R
 	
 
- review_bing_sentiment.png\
+image/review_bing_sentiment.png\
+	image/review_nrc_sentiment.png\
+	image/score5review_nrc_sentiment.png\
+	image/score1review_nrc_sentiment.png\
 	image/sentiment_match_in_three_database.png:\
 	derived_data/review_words_filtered.csv\
 	sentiment_explore.R
