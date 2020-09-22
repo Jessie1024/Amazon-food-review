@@ -5,5 +5,8 @@ RUN R -e "install.packages('kableExtra')"
 RUN R -e "install.packages('formattable')"
 RUN R -e "install.packages('textdata')"
 RUN R -e "webshot::install_phantomjs()"
+RUN R -e "install.package('topicmodels')
+RUN R -e "install.package('tm')
+RUN R -e "install.package('plotly')
 RUN apt-get update
 RUN apt-get -y install ne 
