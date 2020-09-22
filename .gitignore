@@ -1,7 +1,7 @@
 .local/*
 .rstudio/*
 derived_data/*.csv
-
+source_data/*.json
 figures/*.png
 figures/*.pdf
 .active-rstudio-document
