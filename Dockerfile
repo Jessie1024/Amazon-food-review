@@ -11,3 +11,9 @@ RUN R -e "install.packages('plotly')"
 RUN R -e "install.packages('circlize')"
 RUN R -e "install.packages('ggrepel')"
 RUN R -e "install.packages('gridExtra')"
+RUN R -e "install.packages('rjson')"
+RUN R -e "install.packages('quanteda')"
+RUN R -e "install.packages('reshape2')"
+RUN R -e "install.packages('mlr')"
+RUN apt-get update
+RUN apt-get install -y libgsl0-dev
