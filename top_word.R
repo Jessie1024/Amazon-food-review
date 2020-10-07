@@ -19,7 +19,7 @@ review_words_filtered <- clean_data %>%
  
 write_csv(review_words_filtered, "derived_data/review_words_filtered.csv")
 
-
+review_words_filtered<-read_csv("derived_data/review_words_filtered.csv")
 review_words_filtered %>%
   count(word, sort = TRUE) %>%
   top_n(10) %>%
@@ -34,4 +34,4 @@ review_words_filtered %>%
   ylab("Word Count in review") +
   ggtitle("Most Frequently Used Words in Reviews") +
   coord_flip()+
-  ggsave("image/top words.png")
+  ggsave("image/top_words.png")
