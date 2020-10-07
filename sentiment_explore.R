@@ -1,24 +1,3 @@
-#Define some colors to use throughout
-my_colors <- c("#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#D55E00", "#D65E00")
-
-#Customize ggplot2's default theme settings
-#This tutorial doesn't actually pass any parameters, but you may use it again in future tutorials so it's nice to have the options
-
-{
-  theme(plot.title = element_text(hjust = 0.5), #Center the title
-        axis.ticks = aticks, #Set axis ticks to on or off
-        panel.grid.minor = pgminor, #Turn the minor grid lines on or off
-        legend.title = lt, #Turn the legend title on or off
-        legend.position = lp) #Turn the legend on or off
-}
-
-#Customize the text tables for consistency using HTML formatting
-my_kable_styling <- function(dat, caption) {
-  kable(dat, "html", escape = FALSE, caption = caption) %>%
-    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"),
-                  full_width = FALSE)
-}
-
 library(tidytext)
 library(stringr)
 library(textdata)
@@ -28,11 +7,22 @@ library(formattable)
 library(knitr)
 library(kableExtra)
 library(tidyverse)
+library(gridExtra)
+my_colors <- c("#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#D55E00", "#D65E00")
+
+
+my_kable_styling <- function(dat, caption) {
+  kable(dat, "html", escape = FALSE, caption = caption) %>%
+    kable_styling(bootstrap_options = c("striped", "condensed", "bordered"),
+                  full_width = FALSE)
+}
+
 
 
 bing <- get_sentiments("bing") %>% 
   mutate(lexicon = "bing", 
          words_in_lexicon = n_distinct(word))    
+
 
 nrc <- get_sentiments("nrc") %>% 
   mutate(lexicon = "nrc", 
@@ -79,81 +69,16 @@ review_tidy <-
 
 save_kable(review_tidy,"image/sentiment_match_in_three_database.png")
 
+#bing clean up
 review_bing <- review_words_filtered %>%
   inner_join(get_sentiments("bing"))
 
-bing_plot <- review_bing %>%
-  group_by(sentiment) %>%
-  summarise(word_count = n()) %>%
-  ungroup() %>%
-  mutate(sentiment = reorder(sentiment, word_count)) %>%
-  ggplot(aes(sentiment, word_count, fill = sentiment)) +
-  geom_col() +
-  guides(fill = FALSE) +
-  labs(x = NULL, y = "Word Count") +
-  scale_y_continuous(limits = c(0, 1500000)) +
-  ggtitle("Review Bing Sentiment") +
-  coord_flip()+
-  ggsave("image/review_bing_sentiment.png")
+saveRDS(review_bing, "derived_data/review_bing.rds")
 
+#nrc clean_up
 
 review_nrc <- review_words_filtered %>%
   inner_join(get_sentiments("nrc"))
 
-
-
-nrc_plot <- review_nrc %>%
-  group_by(sentiment) %>%
-  summarise(word_count = n()) %>%
-  ungroup() %>%
-  mutate(sentiment = reorder(sentiment, word_count)) %>%
-  #Use `fill = -word_count` to make the larger bars darker
-  ggplot(aes(sentiment, word_count, fill = -word_count)) +
-  geom_col() +
-  guides(fill = FALSE) + #Turn off the legend
-  labs(x = NULL, y = "Word Count") +
-  scale_y_continuous(limits = c(0, 2000000)) + #Hard code the axis limit
-  ggtitle("Review NRC Sentiment") +
-  coord_flip()+
-  ggsave("image/review_nrc_sentiment.png")
-
-review_nrc_5<- review_words_filtered %>%
-  inner_join(get_sentiments("nrc"))%>%
-  filter(score==5)
-
-nrc_plot_5 <- review_nrc_5 %>%
-  group_by(sentiment) %>%
-  summarise(word_count = n()) %>%
-  ungroup() %>%
-  mutate(sentiment = reorder(sentiment, word_count)) %>%
-  #Use `fill = -word_count` to make the larger bars darker
-  ggplot(aes(sentiment, word_count, fill = -word_count)) +
-  geom_col() +
-  guides(fill = FALSE) + #Turn off the legend
-  labs(x = NULL, y = "Word Count") +
-  scale_y_continuous(limits = c(0, 1500000)) + #Hard code the axis limit
-  ggtitle("Positive Review NRC Sentiment ") +
-  coord_flip()+
-  ggsave("image/score5review_nrc_sentiment.png")
-
-
-review_nrc_1<- review_words_filtered %>%
-  inner_join(get_sentiments("nrc"))%>%
-  filter(score==1)
-
-nrc_plot_1 <- review_nrc_1 %>%
-  group_by(sentiment) %>%
-  summarise(word_count = n()) %>%
-  ungroup() %>%
-  mutate(sentiment = reorder(sentiment, word_count)) %>%
-  #Use `fill = -word_count` to make the larger bars darker
-  ggplot(aes(sentiment, word_count, fill = -word_count)) +
-  geom_col() +
-  guides(fill = FALSE) + #Turn off the legend
-  labs(x = NULL, y = "Word Count") +
-  scale_y_continuous(limits = c(0, 150000)) + #Hard code the axis limit
-  ggtitle("Negative Review NRC Sentiment ") +
-  coord_flip()+
-  ggsave("image/score1review_nrc_sentiment.png")
-
+saveRDS(review_nrc,"derived_data/review_nrc.rds")
 
