@@ -1,0 +1,33 @@
+---
+title: "Amazon_review_topic_sentiment_modeling"
+author: "Qianhui Yang"
+date: "10/6/2020"
+output: pdf_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+#Introduction
+
+The purpose of this project is to discover if there is strong sentimental difference between the positive and negative reviews. And if we can use machine learning to let the computer to detect the topic of reviews.
+
+We found there are significant sentimental difference between the negative and positive review, and the machine help us to detect the topic 4 in 5 time correct. Not bad!
+
+
+```{r overall}
+
+overall<-readRDS("image/overall_amazon_food_socre_helpfullness.rds")
+plot(overall)
+
+```
+
+## Including Plots
+
+You can also embed plots, for example:
+
+```{r pressure, echo=FALSE}
+plot(pressure)
+```
+
+Note that the `echo = FALSE` parameter was added to the code chunk to prevent printing of the R code that generated the plot.
