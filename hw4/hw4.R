@@ -1,0 +1,89 @@
+library(tidyverse)
+library(dplyr)
+library(gbm)
+library(MLmetrics)
+##train test validation split
+gender_classification<-read_csv("~/hw4/500_Person_Gender_Height_Weight_Index.csv")
+gender_classification$Gender<-as.factor(gender_classification$Gender)
+gender_classification$Gender_factor[gender_classification$Gender=="Male"]=0
+gender_classification$Gender_factor[gender_classification$Gender=="Female"]=1
+
+model_split <- function(dfi, train_p, validate_p, test_p, col_name="exp_group"){
+  dfi <- sample_n(dfi, nrow(dfi),replace=FALSE);
+  p <- (seq(nrow(dfi))-1)/nrow(dfi);
+  train_dfi <- dfi %>% filter(p < train_p);
+  validate_dfi <- dfi %>% filter(p < train_p + validate_p & p >= train_p);
+  test_dfi <- dfi %>% filter(p >= train_p + validate_p);
+  train_dfi[[col_name]] <- "train";
+  validate_dfi[[col_name]] <- "validate";
+  test_dfi[[col_name]] <- "test";
+  rbind(train_dfi, validate_dfi, test_dfi);
+}
+
+gender_classification<- rbind(model_split(gender_classification %>% filter(Gender=='Male'), 1/3, 1/3, 1/3),
+           model_split(gender_classification %>% filter(Gender=='Female'), 1/3, 1/3, 1/3));
+gender_classification%>% group_by(Gender, exp_group) %>% tally()
+
+##glm
+train <- gender_classification %>% filter(exp_group=="train");
+validate <- gender_classification %>% filter(exp_group=="validate");
+test <- gender_classification %>% filter(exp_group=="test");
+glm<-glm(Gender_factor~Height+Weight,family=binomial(link='logit'),data=train)
+pred <- predict(glm, newdata=validate, type="response");
+
+accuracy<-sum((pred>0.5) == validate$Gender_factor)/nrow(validate);
+
+
+##gbm
+train$Gender_factor[train$Gender=="Male"]=0
+train$Gender_factor[train$Gender=="Female"]=1
+gbm <- gbm(Gender_factor~Height+Weight, distribution="bernoulli",
+             data=train,
+             n.trees = 100,
+             interaction.depth = 2,
+             shrinkage = 0.1);
+pred_bgm <- predict(gbm, newdata=validate, type="response");
+pred_gbm<-as.data.frame(pred_bgm)
+accuracy_gbm<-sum((pred_bgm>0.5) == validate$Gender_factor)/nrow(validate);
+
+
+##only 50 males
+male50<-read_csv("~/hw4/500_Person_Gender_Height_Weight_Index.csv")
+male50$Gender_factor[male50$Gender=="Male"]=0
+male50$Gender_factor[male50$Gender=="Female"]=1
+new<-male50[order(-male50$Gender_factor),]
+new50<-new[c(1:305),]
+#split new dataset
+new50<- rbind(model_split(new50 %>% filter(Gender=='Male'), 1/3, 1/3, 1/3),
+                              model_split(new50 %>% filter(Gender=='Female'), 1/3, 1/3, 1/3));
+new50%>% group_by(Gender, exp_group) %>% tally()
+
+
+train50 <-new50 %>% filter(exp_group=="train");
+validate50 <- new50  %>% filter(exp_group=="validate");
+test50 <- new50 %>% filter(exp_group=="test");
+
+gbm50 <- gbm(Gender_factor~Height+Weight, 
+           data=train50,
+           distribution="bernoulli",
+           n.trees = 100,
+           interaction.depth = 2,
+           shrinkage = 0.1)
+           
+pred_gbm50 <- predict(gbm50, newdata=validate50, type="response");
+accuracy50<-sum((pred_gbm50>0.5) == validate50$Gender_factor)/nrow(validate50);
+f1 <- MLmetrics::F1_Score;
+subset_f1<-validate50[c(2:5)]
+f1_pred<-ifelse(pred_gbm50<0.5,0,1)
+f1_male50<-f1(y_pred = f1_pred,y_true = subset_f1$Gender_factor,positive = "1");
+
+##ROC
+library(pROC)
+plot(roc(subset_f1$Gender_factor,pred_gbm50))
+
+##kmeans
+set.seed(123)
+gender<-gender_classification%>%
+  select(Weight,Height,Index)
+kmeans<-kmeans(gender,2)
+kmeans$centers
