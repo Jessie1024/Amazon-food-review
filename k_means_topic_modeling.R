@@ -13,6 +13,7 @@ library(tidyverse)
 library(quanteda)
 library(reshape2)
 library(stringr)
+library(ggrepel)
 my_colors <- c("#66C2A5", "#FC8D62", "#8DA0C", "#E78AC3", "#A6D854", "#FFD92F")
 
 #customize ggplot2's default theme settings

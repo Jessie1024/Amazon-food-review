@@ -15,8 +15,7 @@ full_word_count<-raw_data %>%
   summarise(num_words=n()) %>%
   arrange(desc(num_words))
 
-full_word_count<-write_csv(full_word_count,"derived_data/full_word_count.csv")
-full_word_count<-read_csv("derived_data/full_word_count.csv")
+
 #####top20 graph#####3
   full_word_count[1:23,] %>%
   ungroup(num_words, id, summary,score) %>%
@@ -41,11 +40,11 @@ full_word_count<-read_csv("derived_data/full_word_count.csv")
                     c("striped", "condensed", "bordered"), 
                   full_width = FALSE)%>%
     save_kable("image/last20_length_review.png")
+
+##ANOVA on the length and score
   
-  
-  
-  
-  
-  
-  
+anova<-lm(score~num_words,data = full_word_count)
+summary(anova) 
+
+
   
