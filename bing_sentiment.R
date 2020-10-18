@@ -1,3 +1,13 @@
+library(tidytext)
+library(stringr)
+library(textdata)
+library(dplyr)
+library(tidyr)
+library(formattable)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+library(gridExtra)
 review_bing<-readRDS("derived_data/review_bing.rds")
 
 review_bing_1<-review_bing  %>% filter(review_bing$score==1)
