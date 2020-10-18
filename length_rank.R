@@ -15,7 +15,7 @@ full_word_count<-raw_data %>%
   summarise(num_words=n()) %>%
   arrange(desc(num_words))
 
-
+write_csv(full_word_count,"derived_data/full_word_count.csv")
 #####top20 graph#####3
   full_word_count[1:23,] %>%
   ungroup(num_words, id, summary,score) %>%
