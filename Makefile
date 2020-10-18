@@ -138,8 +138,3 @@ image/k_means_for_5_topics.png:\
 
 
 
-
-
-
-
-
