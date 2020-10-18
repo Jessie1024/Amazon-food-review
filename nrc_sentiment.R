@@ -1,4 +1,15 @@
+library(tidytext)
+library(stringr)
+library(textdata)
+library(dplyr)
+library(tidyr)
+library(formattable)
+library(knitr)
+library(kableExtra)
+library(tidyverse)
+library(gridExtra)
 review_nrc<-readRDS("derived_data/review_nrc.rds")
+review_words_filtered <- read_csv("derived_data/review_words_filtered.csv")
 
 nrc_plot <- review_nrc %>%
   group_by(sentiment) %>%
