@@ -8,6 +8,8 @@ library(knitr)
 library(kableExtra)
 library(tidyverse)
 library(gridExtra)
+
+
 my_colors <- c("#E69F00", "#56B4E9", "#009E73", "#CC79A7", "#D55E00", "#D65E00")
 
 
@@ -28,17 +30,12 @@ nrc <- get_sentiments("nrc") %>%
   mutate(lexicon = "nrc", 
          words_in_lexicon = n_distinct(word))
 
-afinn <- get_sentiments("afinn") %>% 
-  mutate(lexicon = "afinn", 
-         words_in_lexicon = n_distinct(word))
 
-new_sentiments <- bind_rows(afinn, bing, nrc)
+
+new_sentiments <- bind_rows(bing, nrc)
 
 
 new_sentiments <- new_sentiments %>% #From the tidytext package
-  mutate( sentiment = ifelse(lexicon == "AFINN" & value >= 0, "positive",
-                             ifelse(lexicon == "AFINN" & value < 0,
-                                    "negative", sentiment))) %>%
   group_by(lexicon) %>%
   mutate(words_in_lexicon = n_distinct(word)) %>%
   ungroup()
