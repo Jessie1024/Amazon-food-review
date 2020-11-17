@@ -3,8 +3,8 @@ title: "Amazon review topic and sentiment modeling"
 author: "Qianhui Yang"
 date: "10/6/2020"
 output:
-  html_document: default
   pdf_document: default
+  html_document: default
 ---
 
 ```{r setup, include=FALSE}
@@ -114,8 +114,8 @@ k-means is a clustering method used to partition observations into k clusters, i
 </center>
 
 
-
-
+# Future interests
+In the future, we are interested in trying other sentimental analysis dictionary and add some of our customized dictionary for the food reviews. In addition, we are interested in trying to make a overlap of the topic and sentiment analysis to develop a recommendation system for the customers by their personal preference topic.
 
 
 
